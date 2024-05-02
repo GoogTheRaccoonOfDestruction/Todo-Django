@@ -7,17 +7,11 @@ from . models import Task
 
 
 def TaskList(request):
-    if request.method == 'POST':
-        task_id = request.POST.get('task_id')
-        task = Task.objects.get(id=task_id)
-        task.status = 'completed'
-        task.save()
-        return redirect('tasklist')
-    else:
-        tasks = Task.objects.filter(status='pending')
-        return render(request, 'TodoList/TaskList.html', {'tasks': tasks})
+    tasks = Task.objects.all()
+    return render(request, 'TodoList/TaskList.html', {'tasks': tasks})
 
 def CreateTask(request):
+    tasks = Task.objects.filter(status = "pending-")
     if request.method == "POST":
         form = TaskForm(request.POST)
         if form. is_valid():
@@ -26,4 +20,15 @@ def CreateTask(request):
     else:
         form = TaskForm()
 
-    return render(request, "TodoList/TaskForm.html", {"form": form})
+    return render(request, "TodoList/TaskForm.html", {"form": form, "tasks":tasks})
+
+def DeleteTask(request, Task_ID):
+    task = Task.objects.get(id=Task_ID)
+    task.delete()
+    return redirect("create_task")
+
+def CompleteTask(request, Task_ID):
+    task = Task.objects.get(id = Task_ID)
+    task.status = "completed"
+    task.save()
+    return redirect("create_task")
