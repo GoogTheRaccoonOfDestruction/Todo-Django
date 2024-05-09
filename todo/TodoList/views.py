@@ -8,19 +8,19 @@ from . models import Task
 
 def TaskList(request):
     tasks = Task.objects.all()
-    return render(request, 'TodoList/TaskList.html', {'tasks': tasks})
+    return render(request, 'TodoList/TaskForm.html', {'tasks': tasks})
 
 def CreateTask(request):
-    tasks = Task.objects.filter(status = "pending-")
+    tasks = Task.objects.filter(status = "pending")
     if request.method == "POST":
         form = TaskForm(request.POST)
         if form. is_valid():
             form.save()
-            return redirect("tasklist")
+            return redirect("create_task")
     else:
         form = TaskForm()
 
-    return render(request, "TodoList/TaskForm.html", {"form": form, "tasks":tasks})
+    return render(request, "TodoList/TaskList.html", {"form": form, "tasks":tasks})
 
 def DeleteTask(request, Task_ID):
     task = Task.objects.get(id=Task_ID)
