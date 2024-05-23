@@ -22,13 +22,13 @@ def CreateTask(request):
 
     return render(request, "TodoList/TaskList.html", {"form": form, "tasks":tasks})
 
-def DeleteTask(request, Task_ID):
-    task = Task.objects.get(id=Task_ID)
+def DeleteTask(request, task_id):
+    task = Task.objects.get(id=task_id)
     task.delete()
     return redirect("create_task")
 
-def CompleteTask(request, Task_ID):
-    task = Task.objects.get(id = Task_ID)
+def CompleteTask(request, task_id):
+    task = Task.objects.get(id = task_id)
     task.status = "completed"
     task.save()
     return redirect("create_task")
