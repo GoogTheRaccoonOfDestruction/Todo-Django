@@ -13,3 +13,4 @@ class Task(models.Model):
     status = models.CharField(max_length=20, choices= STATUS, default="pending")
     type = models.CharField(max_length=20, choices= TYPES, default="personal ")
     priority = models.CharField(max_length=20, choices= PRIORITY, default="normal")
+    # add a user field to the module

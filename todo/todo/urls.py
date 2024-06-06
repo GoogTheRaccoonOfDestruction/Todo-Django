@@ -20,4 +20,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("TodoList/", include("TodoList.urls")),
+    # add a path for the login functionality '' that includes django.contrib.auth.urls
 ]
