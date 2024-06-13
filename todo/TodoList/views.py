@@ -1,6 +1,5 @@
+from django.contrib import messages
 from django.shortcuts import render
-from pyexpat.errors import messages
-
 from . forms import TaskForm
 
 # Create your views here.
@@ -28,12 +27,12 @@ def CreateTask(request):
 
 # Define a view function named login_view that handles user login.
 def login_view(request):
-    pass
+
     # Check if the request method is POST (i.e., form submission).
     if request.method == 'POST':
-
         # Create an instance of AuthenticationForm with the request and form data.
         form = AuthenticationForm(request, data=request.POST)
+
         # Check if the form is valid.
         if form.is_valid():
             # Retrieve username and password from the form's cleaned_data.
@@ -45,17 +44,17 @@ def login_view(request):
             if user is not None:
                 login(request, user)
                 # Display a success message informing the user about successful login.
-                messages.info(request, f"you are now logged in as {username}")
+                messages.info(request, f"You are now logged in as {username}.")
                 # Redirect the user to the task list page.
                 return redirect('task_list')
-
-                # Display an error message for invalid username or password.
             else:
-                messages.error(request, "invalid username or password")
+                # Display an error message for invalid username or password.
+                messages.error(request, "Invalid username or password.")
 
-            # Display an error message for invalid form data.
         else:
-            messages.error(request, "invalid username or password")
+            # Display an error message for invalid form data.
+            messages.error(request, "Invalid username or password.")
+
         # If the request method is not POST, create a new instance of AuthenticationForm.
     else:
         form = AuthenticationForm()
