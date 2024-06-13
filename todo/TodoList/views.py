@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.shortcuts import render
-from . forms import TaskForm
+from . forms import TaskForm, RegisterForm
 
 # Create your views here.
 from django.shortcuts import render, redirect
@@ -62,30 +62,32 @@ def login_view(request):
     return render(request, 'TodoList/login.html', {'form': form})
 
 
-
 def register(request):
-    pass
     # Check if the request method is POST (i.e., form submission).
+    if request.method == 'POST':
+    # Create an instance of RegisterForm with the form data from the request.
+        form = RegisterForm(request.POST)
+    # Check if the form is valid.
+        if form.is_valid():
+    # Save the form to create a new user.
+            user = form.save
+    # Log in the newly registered user.
+            login(request, user)
+    # Display a success message for successful registration.
+            messages.success(request, "Registration successful")
+    # Redirect the user to the task list page.
+            return redirect('task_list')
 
-        # Create an instance of RegisterForm with the form data from the request.
-
-        # Check if the form is valid.
-
-            # Save the form to create a new user.
-
-            # Log in the newly registered user.
-
-            # Display a success message for successful registration.
-
-            # Redirect the user to the task list page.
-
-
-            # Display an error message for unsuccessful registration due to invalid information.
-
+    # Display an error message for unsuccessful registration due to invalid information.
+        else:
+            messages.error(request, "Uncessful resgistration. Invalid information")
 
         # If the request method is not POST, create a new instance of RegisterForm.
+    else:
+        form = RegisterForm()
 
-    # Render the registration form template with the form instance.
+# Render the registration form template with the form instance.
+        return render(request, 'TodoList/register.html',{'form' : form})
 
 
 def DeleteTask(request, task_id):

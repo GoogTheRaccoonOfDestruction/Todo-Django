@@ -36,7 +36,8 @@ from . models import Task
 # class is form-control, and the value placeholder is Username and Password for password filed
 # '''
 
-
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 
 
@@ -44,3 +45,10 @@ class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
         fields = ['title', 'description', 'type', 'priority']
+
+class RegisterForm(UserCreationForm):
+    email = forms.EmailField()
+
+    class Meta:
+        moder = User
+        fields = ['username', 'email', 'password1', 'password2']
