@@ -1,0 +1,30 @@
+{% extends 'todoapp/base.html' %}
+{% load static %}
+
+{% block content %}
+<html>
+<head>
+    <title>Todo App</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'todoapp/css/styles.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+<div class="container vh-100 d-flex justify-content-center align-items-center">
+    <div class="card p-4">
+        <h2 class="text-center">Login</h2>
+        <form method="post" class="form-signin">
+            {% csrf_token %}
+            <div class="form-group">
+
+            </div>
+            <div class="form-group">
+
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Login</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
+{% endblock %}
