@@ -36,7 +36,7 @@ from . models import Task
 # class is form-control, and the value placeholder is Username and Password for password filed
 # '''
 
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 
 
@@ -44,11 +44,16 @@ from django.contrib.auth.models import User
 class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
-        fields = ['title', 'description', 'type', 'priority']
+        fields = ['title', 'description', 'task_type', 'category']
+
+
+class CustomAuthenticationForm(AuthenticationForm):
+    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'}))
 
 class RegisterForm(UserCreationForm):
     email = forms.EmailField()
 
     class Meta:
-        moder = User
+        model = User
         fields = ['username', 'email', 'password1', 'password2']
