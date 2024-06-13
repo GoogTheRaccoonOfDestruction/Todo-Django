@@ -8,5 +8,7 @@ urlpatterns = [
     path("", views.CreateTask, name="create_task"),
     path("complete/<int:task_id>/" ,views.CompleteTask, name="completetask"),
     path("delete/<int:task_id>/", views.DeleteTask, name="deletetask"),
+    path('login/', views.login_view, name='login'),
+    path('register/', views.register, name='register'),
     ] + static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
 
